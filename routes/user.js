@@ -50,11 +50,11 @@ router.put('/:id', async (req, res) => {
   
     const user = await User.findByIdAndUpdate(req.params.id,
       { 
-          fullname: req.body.title,
-          email: req.body.firstname,
-          phonenumber: req.body.lastname,
+          fullname: req.body.fullname,
+          email: req.body.email,
+          phonenumber: req.body.phonenumber,
           username: req.body.username,
-          password: req.body.physicaladdress
+          password: req.body.password
         }, { new: true });
   
     if (!user) return res.status(404).send('The user with the given ID was not found.');

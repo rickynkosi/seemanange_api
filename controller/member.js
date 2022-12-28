@@ -23,7 +23,21 @@ exports.addMember = async (req, res, next) => {
     let member = await Member.findOne({ idnumber: req.body.idnumber });
     if (member) return res.status(400).send('Member already registered.');
 
-    member = new Member(lodash.pick(req.body, ['title','firstname','lastname','idnumber','policy','easypay','premium','physicaladdress','phonenumber','email']));
+    member = new Member(lodash.pick(req.body, 
+        ['title',
+        'firstname',
+        'lastname',
+        'idnumber',
+        'birthdate',
+        'passportnumber',
+        'policy',
+        'easypay',
+        'premium',
+        'postaladdress',
+        'physicaladdress',
+        'phonenumber',
+        'email'
+    ]));
 
     member = await member.save();
     res.send(member);

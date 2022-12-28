@@ -1,6 +1,6 @@
 {
   "jwtPrivateKey": "unsecureKey",
-  "db": "mongodb+srv://thestig:YJYUNequOuqxGJjx@cluster0.gxn2dpl.mongodb.net/?retryWrites=true&w=majority",
+  "db": "mongodb://localhost/zokosani",
   "port": "5001",
   "requiresAuth": false
 }

@@ -1,31 +1,21 @@
-const mongoose = require('mongoose');
-// const admin = require('../middleware/admin');
-// const auth = require('../middleware/auth');
-const {Car, validate} = require('../models/fleetaddcarmodel');
-const admin = require('../middleware/admin');
 const express = require('express');
-const router = express.Router();
-const { getFleet, getFleets, addFleet, updateFleet, deleteFleet } = require('../models/fleetaddcarmodel');
+const mongoose = require('mongoose');
+const lodash = require('lodash');
+const {Car, validate} = require('../models/fleetaddcarmodel');
 
-
-//get all fleet 
-router.get('/', async (req, res) => {
+exports.getFleets = async (req, res, next) => {
     const car = await Car.find().sort('name');
     res.send(car);
-});
+};
 
+exports.getFleet = async (req, res, next) => {
+     // throw new Error('Could not get the car.');
+     const car = await Car.findById(req.params.id);
+     if (!car) return res.status(400).send('The Car with given ID was not found');
+     res.send(car);
+};
 
-// get a single fleet
-router.get('/:id', async(req, res) => {
-    // throw new Error('Could not get the car.');
-    const car = await Car.findById(req.params.id);
-    if (!car) return res.status(400).send('The Car with given ID was not found');
-    res.send(car);
-});
-
-// add a fleet
-router.post('/', async(req, res) => {
-
+exports.addFleet = async (req, res, next) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -40,10 +30,9 @@ router.post('/', async(req, res) => {
 
     addcar = await addcar.save();
     res.send(addcar);
-});
+};
 
-//update a fleet
-router.put('/:id',admin, async(req, res) => {
+exports.updateFleet = async (req, res, next) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -59,25 +48,12 @@ router.put('/:id',admin, async(req, res) => {
     if (!car) return res.status(404).send('The given car with the ID was not found');
 
     res.send(car);
-});
+};
 
-// delete fleet
-router.delete('/:id',admin, async(req, res) => {
+exports.deleteFleet = async (req, res, next) => {
     const car = await Car.findByIdAndRemove(req.params.id);
      
     if (!car) return res.status(404).send('The car with the given ID was not found');
 
     res.send(car);
-});
-
-router.get('/', getFleets);
-
-router.get('/:id', getFleet);
-
-router.get('/', addFleet);
-
-router.updateFleet('/:id', updateFleet);
-
-router.delete('/:id', deleteFleet);
-
-module.exports = router;
+};

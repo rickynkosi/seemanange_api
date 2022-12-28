@@ -11,7 +11,7 @@
     "node": "16.13.2"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ricky Nkosi",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
