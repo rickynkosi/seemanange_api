@@ -9,16 +9,16 @@ const cashSchema = new mongoose.Schema({
         maxlength: 20 
     },
     idnumber: {
-        type: String,
+        type: Number,
         required: true,
-        minlength: 2,
+        minlength: 13,
         maxlength: 255
     },
     phonenumber: {
         type: Number,
         required: true,
         minlength: 2,
-        maxlength: 20
+        maxlength: 12
     },
     amount: {
         type: Number,
@@ -44,11 +44,11 @@ const Cash = new mongoose.model('Cash', cashSchema);
 function validateCash(cash) {
     const schema = {
         fullname: Joi.string().min(2).required(),
-        idnumber: Joi.string().min(2).required(),
+        idnumber: Joi.number().min(2).required(),
         phonenumber: Joi.number().min(2).required(),
         amount: Joi.number().min(2).required(),
-        services: Joi.number().min(2).required()
-        // date: Joi.Date().min(2).required()
+        services: Joi.string().min(2).required(),
+        date: Joi.date().min(2).required()
     }
     return Joi.validate(cash);
 }

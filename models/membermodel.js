@@ -31,7 +31,7 @@ const memberSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 2,
-        maxlength: 13,
+        maxlength: 255,
         unique: true
     },
     passportnumber: {
@@ -44,12 +44,12 @@ const memberSchema = new mongoose.Schema({
     policy: {
         type: String,
         required: true,
-        minlength: 2,
+        minlength: 1,
         maxlength: 50
     },
     easypay: {
         type: Number,
-        default: '00000000000000',
+        default: '1000000000000001',
         minlength: 2,
         maxlength: 20,
         unique: true
@@ -124,7 +124,7 @@ function validateMember(member) {
         idnumber: Joi.number().min(2).required(),
         birthdate: Joi.string().min(2).required(),
         passportnumber: Joi.string().min(2).required(),
-        policy: Joi.string().min(2).required(),
+        policy: Joi.string().min(1).required(),
         easypay: Joi.number().min(2),
         premium: Joi.number().min(2).required(),
         postaladdress: Joi.string().min(2).required(),

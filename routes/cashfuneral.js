@@ -1,7 +1,6 @@
-
 const express = require('express');
 const router = express.Router();
-const { getCashfuneral, getCashfunerals, addCashfuneral, updateCashfuneral, deleteCashfuneral } = require('../models/cashfuneralmodel');
+const { getCashfuneral, getCashfunerals, addCashfuneral, updateCashfuneral, deleteCashfuneral } = require('../controller/cashfuneral');
 // const lodash = require('lodash');
 // const {Cash, validate} = require('../models/cashfuneralmodel');
 // const admin = require('../middleware/admin');

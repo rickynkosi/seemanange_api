@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const lodash = require('lodash');
-const {Branch, validate} = require('../models/branchmodel');
+const {Cash, validate} = require('../models/cashfuneralmodel');
 
 exports.getCashfuneral = async (req, res, next) => {
     const cash = await Cash.find().sort('fullname');
@@ -9,10 +9,10 @@ exports.getCashfuneral = async (req, res, next) => {
 };
 
 exports.getCashfunerals = async (req, res, next) => {
-    const branch = await Branch.find().sort('branchname')
+    const cash = await Cash.find().sort('fullname')
         .select('-__v')
-        .sort('branchname');
-    res.send(branch);
+        .sort('fullname');
+    res.send(cash);
 };
 
 exports.addCashfuneral = async (req, res, next) => {
@@ -31,7 +31,7 @@ exports.updateCashfuneral = async (req, res, next) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const cash = await Car.findByIdAndUpdate(req.params.id, { 
+    const cash = await Cash.findByIdAndUpdate(req.params.id, { 
         fullname: req.body.fullname,
         idnumber: req.body.idnumber,
         phonenumber: req.body.phonenumber,
@@ -50,7 +50,7 @@ exports.updateCashfuneral = async (req, res, next) => {
 exports.deleteCashfuneral = async (req, res, next) => {
     const cash = await Cash.findByIdAndRemove(req.params.id);
      
-    if (!cash) return res.status(404).send('The member with the given ID was not found');
+    if (!cash) return res.status(404).send('The cash funeral with the given ID was not found');
 
     res.send(cash);
 };
