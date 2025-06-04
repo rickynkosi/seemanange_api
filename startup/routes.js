@@ -10,7 +10,6 @@ const auth = require('../routes/auth');
 const cashfuneral = require('../routes/cashfuneral');
 const error = require('../middleware/error');
 
-// this code deals with api's
 module.exports = function(app) {
   app.use(express.json());
   app.use('/v1/user', user);
